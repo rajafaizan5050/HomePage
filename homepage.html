@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Fazi.com</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+  <!-- AOS (Animate on Scroll) -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to right, #025e6e, #1b2e43);
+      color: #fff;
+      line-height: 1.6;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    /* Dark Mode */
+    body.dark-mode {
+      background: linear-gradient(to right, #333, #555);
+      color: #eee;
+    }
+
+    header {
+      text-align: center;
+      padding: 3rem 1rem;
+      background: linear-gradient(to left, #0083b0, #00b4db);
+      color: white;
+      border-bottom: 12px solid #ffffff;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    header img {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      border: 4px solid #fff;
+      object-fit: cover;
+      transition: transform 0.3s ease-in-out;
+    }
+
+    header img:hover {
+      transform: scale(1.1);
+    }
+
+    h1 {
+      margin: 1rem 0 0.2rem;
+      font-size: 2.5rem;
+      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    }
+
+    .typing {
+      color: #fff;
+      font-size: 1.2rem;
+      font-weight: 300;
+      min-height: 1.2em;
+       animation: typing 5s steps(49) infinite; 
+    }
+
+    .resume-btn {
+      margin-top: 1rem;
+      display: inline-block;
+      padding: 10px 20px;
+      background: #fff;
+      color: #0083b0;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background 0.3s ease;
+    }
+
+    .resume-btn:hover {
+      background: #0083b0;
+      color: white;
+    }
+
+    /* Dark Mode Button */
+    .mode-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      padding: 10px;
+      background-color: #0083b0;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 20px;
+      transition: 0.3s ease;
+    }
+
+    .mode-toggle:hover {
+      background-color: #00b4db;
+    }
+
+    /* Skills Section */
+    .skills, .gallery, .journey, .socials {
+      max-width: 1000px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+      text-align: center;
+    }
+
+    .skills h2, .gallery h2, .journey h2 {
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+      text-transform: uppercase;
+      color: #0083b0;
+      letter-spacing: 1px;
+    }
+
+    .skill {
+      margin-bottom: 1rem;
+    }
+
+    .skill-name {
+      font-weight: 600;
+      font-size: 1.2rem;
+    }
+
+    .skill-bar {
+      background: #ddd;
+      border-radius: 25px;
+      overflow: hidden;
+      position: relative;
+      height: 20px;
+    }
+
+    .skill-fill {
+      height: 100%;
+      background: #00b4db;
+      color: white;
+      text-align: right;
+      padding-right: 10px;
+      line-height: 20px;
+      width: 0;
+      transition: width 1s ease;
+      font-weight: bold;
+      position: absolute;
+      top: 0;
+      right: 0;
+      font-size: 0.9rem;
+    }
+
+    /* Gallery Section Styles */
+    .gallery-section {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 2rem;
+      margin-top: 2rem;
+      animation: fadeIn 1s ease;
+    }
+
+    .gallery-section img {
+      width: 250px;
+      height: 250px;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+
+    /* Profile Image Styling */
+    .profile-image img {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid #0083b0;
+      transition: transform 0.3s ease;
+    }
+
+    .profile-image img:hover {
+      transform: scale(1.1);
+    }
+
+    /* Project Image Styling */
+    .project-images {
+      display: flex;
+      gap: 1.5rem;
+      justify-content: center;
+    }
+
+    .project-images img {
+      width: 250px;
+      height: 250px;
+      object-fit: cover;
+      border-radius: 10px;
+      transition: transform 0.3s ease;
+    }
+
+    .project-images img:hover {
+      transform: scale(1.1);
+    }
+
+    /* Socials Section */
+    .socials {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .socials a {
+      margin: 0 10px;
+      font-size: 24px;
+      text-decoration: none;
+      color: #0083b0;
+      transition: 0.3s ease;
+    }
+
+    .socials a:hover {
+      color: #00b4db;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background: #eee;
+      color: #333;
+    }
+
+    /* Contact Form Styles */
+    .contact-form {
+      display: grid;
+      gap: 1rem;
+      max-width: 600px;
+      margin: 2rem auto;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+    }
+
+    .contact-form button {
+      padding: 10px;
+      background-color: #00b4db;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    .contact-form button:hover {
+      background-color: #0083b0;
+    }
+
+    /* Journey Section */
+    .journey {
+      background: #f8f9fa;
+      padding: 2rem 0;
+      text-align: center;
+    }
+
+    .journey .milestone {
+      margin: 1.5rem 0;
+      background: #0083b0;
+      padding: 20px;
+      color: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .journey .milestone h3 {
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+    }
+
+    .journey .milestone p {
+      font-size: 1rem;
+    }
+
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+
+    @keyframes typing {
+      0% {
+        width: 0;
+      }
+      100% {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <!-- Your profile photo, centered -->
+    <img src="my pic/d552b07a-49cc-476e-8c09-985faa5b8af8.jpg" alt="Fazi Photo">
+    <h1>Fazi.com</h1>
+    <div class="typing" id="typing-text">Welcome to my world of code!</div>
+    <a href="c:\Users\Raja Faizan\Downloads\Copy of Tayyaba CV (2) (1).pdf" class="resume-btn" download>Download Resume</a>
+  </header>
+
+  <!-- Dark Mode Toggle Button -->
+  <button class="mode-toggle" onclick="toggleMode()">🌙</button>
+
+  <section class="skills">
+    <h2>My Skills</h2>
+    <div class="skill">
+      <div class="skill-name">HTML</div>
+      <div class="skill-bar"><div class="skill-fill" style="width: 90%;">90%</div></div>
+    </div>
+    <div class="skill">
+      <div class="skill-name">CSS</div>
+      <div class="skill-bar"><div class="skill-fill" style="width: 85%;">85%</div></div>
+    </div>
+    <div class="skill">
+      <div class="skill-name">JavaScript</div>
+      <div class="skill-bar"><div class="skill-fill" style="width: 70%;">60%</div></div>
+    </div>
+    <div class="skill">
+      <div class="skill-name">WordPress</div>
+      <div class="skill-bar"><div class="skill-fill" style="width: 80%;">80%</div></div>
+    </div>
+  </section>
+
+  <section class="journey">
+    <h2>My Journey</h2>
+    <div class="milestone" data-aos="fade-up">
+        <h3>Beginnings: The Spark of Passion</h3>
+        <p>It was a rainy evening when I first stumbled upon a coding tutorial. Little did I know, that was the moment that would change my life forever. My journey into the world of web development started with a simple curiosity about how websites are created. I felt a spark within me, something deep, like finding a hidden treasure. And so, I dived in.</p>
+    </div>
+    <div class="milestone" data-aos="fade-up">
+        <h3>The Challenges: Overcoming Doubts</h3>
+        <p>At first, coding felt like a puzzle with missing pieces. Every new concept, every line of code felt like I was speaking a new language. I stumbled, I doubted myself, and there were moments when I almost gave up. But it was in those moments of frustration that I found my true passion – the desire to build something that works. Gradually, things started to make sense. The pieces of the puzzle came together, and I began creating my first website.</p>
+    </div>
+    <div class="milestone" data-aos="fade-up">
+        <h3>The Breakthrough: Turning Passion Into Skill</h3>
+        <p>As the months went by, I found myself coding every day. HTML, CSS, JavaScript – each language was a new adventure. There were challenges, but the rewards were even greater. The thrill of seeing a website come to life on the screen was incomparable. I poured my heart and soul into every project, and slowly, I went from a beginner to someone who could create websites with ease. The journey wasn’t easy, but every challenge made me stronger.</p>
+    </div>
+    <div class="milestone" data-aos="fade-up">
+        <h3>The Present: A Web Developer</h3>
+        <p>Now, here I am. A web developer. It's not just about writing code anymore; it's about telling a story through each line of it. From static pages to dynamic, interactive websites, I’ve learned so much. But the journey doesn’t stop here – it’s just the beginning. Each new project, every line of code is a step forward into the unknown. The adventure continues, and I’m excited for what lies ahead.</p>
+    </div>
+  </section>
+
+  <section class="gallery">
+    <h2>My Work</h2>
+    <div class="gallery-section">
+      <div class="profile-image">
+        <img src="my pic/d552b07a-49cc-476e-8c09-985faa5b8af8.jpg" alt="Fazi Photo" />
+      </div>
+      <div class="project-images">
+        <img src="my pic/WhatsApp Image 2025-04-18 at 11.23.47_9ebf971f.jpg" alt="Project 1" />
+        <img src="my pic/Capture.PNG" alt="Project 2" />
+        <img src="my pic/Capture22.PNG" alt="Project 3" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Social Links Section -->
+  <section class="socials">
+    <h2>Connect with Me</h2>
+    <a href="https://www.linkedin.com/in/raja-faizan-5a0931355/" target="_blank">LinkedIn</a>
+    <a href="raja.faizan5050@gmail.com" target="_blank">Email</a>
+  </section>
+
+  <!-- Contact Form -->
+  <section class="contact">
+    <h2>Contact Me</h2>
+    <form class="contact-form">
+      <input type="text" placeholder="Your Name" required />
+      <input type="email" placeholder="Your Email" required />
+      <textarea placeholder="Your Message" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Fazi.com | All Rights Reserved</p>
+  </footer>
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init();
+    
+    // Dark mode toggle
+    function toggleMode() {
+      document.body.classList.toggle('dark-mode');
+    }
+  </script>
+</body>
+</html>
